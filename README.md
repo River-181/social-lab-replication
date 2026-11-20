@@ -12,10 +12,17 @@
 - 종합: [`findings/260120_RQ11_종합.md`](findings/260120_RQ11_종합.md)
 
 
+## 검증·반박·이어받기
+
+**[`VERIFY.md`](VERIFY.md)부터 읽는다.** 무엇을 직접 확인할 수 있는지, 다른 통계 방법으로 다시 본 결과(우리가 찾은 약점 포함), 열려 있는 질문, 원문 열람 요청 방법, 자료 사전이 있다. 반론은 Issue 「검증·반론」 양식으로 낸다.
+
+라이선스: 코드는 MIT, 문서·그림·집계 데이터는 CC BY 4.0([`LICENSE`](LICENSE)). 인용 정보는 [`CITATION.cff`](CITATION.cff)에 있다.
+
+
 ## 직접 다시 계산하기 (원자료 없이)
 
 ```bash
-pip install numpy pandas scipy
+pip install -r requirements.txt
 LAB_PUBLIC=data/aggregates python3 scripts/analysis/confirm.py                    # 본 분석
 LAB_PUBLIC=data/aggregates LAB_NO_RECODE=1 python3 scripts/analysis/confirm.py    # 민감도 S3(재코딩 전 값)
 ```

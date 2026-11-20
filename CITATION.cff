@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "리트냥이 사태 온라인 담론 연구 — 검증용 공개본"
+message: "이 자료를 쓰면 아래처럼 인용해 주세요."
+authors:
+  - name: "River"
+  - name: "Claude (AI 연구원 에이전트, Anthropic)"
+date-released: 2026-11-20
+version: "1.0-report-261120"
+repository-code: "https://github.com/River-181/social-lab-replication"
+license: [MIT, CC-BY-4.0]
