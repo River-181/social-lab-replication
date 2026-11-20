@@ -38,7 +38,8 @@ pip install -r requirements.txt
 LAB_PUBLIC=data/aggregates python3 scripts/analysis/confirm.py      # 사전등록 판정(정본)
 python3 scripts/analysis/alt_checks.py                              # 다른 통계 방법으로 다시 보기
 python3 scripts/analysis/explore_public.py                          # 탐색 단계(RQ1·2·3·10) 핵심 수치
-python3 tests/test_replication.py                                   # 위 결과가 기대값과 같은지 + 집계에 원문·식별 칸이 없는지
+python3 scripts/analysis/reliability_public.py                      # 코더 간 일치도(κ)
+python3 tests/test_replication.py                                   # 위 결과가 기대값과 같은지 + 원문·식별 칸이 없는지 + 키 연결
 ```
 
 푸시할 때마다 GitHub Actions가 같은 검사를 돌린다(맨 위 배지).
@@ -163,6 +164,45 @@ python3 tests/test_replication.py                                   # 위 결과
 
 영상 키 `v###`는 `chat_rows.csv`·`live_items.csv`와 같은 규칙이라 서로 이어 붙일 수 있다.
 
+### 변형 자료 (`data/derived/`) — 행 단위, 익명 객체
+
+원문은 없지만 **글·댓글·채팅·코딩 한 건이 한 행**인 자료다. 집계로는 할 수 없는 재분석을 할 수 있다. 예: 사람 단위 집중도, 댓글 트리, 코더 간 일치도, 다른 국면 경계로 다시 나누기.
+- **사람, 글, 댓글, 영상은 익명 키로 객체화했다.** 키는 비밀 솔트를 쓴 HMAC-SHA256이라 공개 자료만으로는 원래 id로 되돌릴 수 없다.
+- 같은 사람은 표가 달라도 같은 키다. 예를 들어 유튜브 댓글도 쓰고 생방송 채팅도 한 사람은 3,278명이다.
+- 시각은 분 단위로 내렸다. 원문, 닉네임, 제목, URL은 없다. 검색어 칸의 실명은 가렸다.
+
+```mermaid
+erDiagram
+    YT_PERSON ||--o{ YT_COMMENT : writes
+    YT_PERSON ||--o{ YT_CHAT : sends
+    VIDEO ||--o{ YT_COMMENT : has
+    VIDEO ||--o{ YT_CHAT : has
+    YT_COMMENT ||--o{ YT_COMMENT : reply_to
+    DC_PERSON ||--o{ DC_POST : writes
+    DC_PERSON ||--o{ DC_COMMENT : writes
+    DC_POST ||--o{ DC_COMMENT : has
+    GALLERY ||--o{ DC_POST : contains
+    UNIT ||--o{ CODE : "coded by 1+ coders"
+    DC_COMMENT ||--o| UNIT : is
+    DC_POST ||--o| UNIT : is
+    YT_COMMENT ||--o| UNIT : is
+```
+
+| 파일 | 행 | 한 행 = | 주요 칸 |
+|---|---|---|---|
+| `dc_posts.csv` | 24,075 | 디시 글 1건 | `post`, `gall`, 시각, 출처(전용갤 전수 / 관련갤 키워드 / 통합검색 C), 찾은 검색어, 작성자 키, 조회·추천·댓글 수 |
+| `dc_comments.csv` | 17,366 | 디시 댓글 1건 | `comment`, `post`, 시각, 작성자 키, 고정닉/유동, 깊이, 삭제 표시(73건). 시스템 봇 행(댓글돌이)은 뺐다 |
+| `yt_comments.csv` | 79,162 | 유튜브 댓글 1건 | `comment`, `video`, `reply_to`, 시각, 좋아요, 작성자 키(인기순 상한 수집) |
+| `yt_chats.csv` | 129,476 | 생방송 채팅 1건 | `video`, 분, 작성자 키, `author_int`(`chat_rows.csv`와 같은 번호), 종류, 슈퍼챗 원화 |
+| `pann_posts.csv` | 2,594 | 네이트판 글 1건 | 시각, 게시판, 댓글 수, 검색어, 연구 기간 여부 |
+| `news_articles.csv` | 66 | 기사 1건(질적 보조) | 매체, 시각, 국면, 자살보도 준칙 항목별 판정(제목·URL 없음) |
+| `codes_all.csv` | 4,783 | 코딩 1회 | `unit`(위 표의 글·댓글 키와 이어짐), 파일(파일럿 A·B / 본 코딩 / skeptic / 재코딩 / 확증), 코더, 프레임·입장·감정·비난 대상·플래그 |
+| `google_trends.csv` | 1,309 | 키워드 × 시간 | 구글 트렌드 지수(외부 기준) |
+
+코더 간 일치도는 `python3 scripts/analysis/reliability_public.py`로 다시 계산할 수 있다(보고값 κ 0.68·0.67·0.52가 재현된다). 다만 파일럿 frame κ=0.68은 코더 A의 '기타'를 'unclear'로 같게 본 값이다. 원래 라벨 그대로면 0.59다. 이 정규화는 원래 문서에 적혀 있지 않았고, 공개 재현 과정에서 드러났다.
+
+**남는 위험**: 원문을 빼고 키를 익명화해도, 공개 게시판에서 「갤러리 + 분 단위 시각」으로 원래 글을 찾아갈 수는 있다. 그 글은 원래 공개된 글이지만, 이 자료를 개인을 찾는 데 쓰지 않는다는 것이 이용 조건이다(아래 9절).
+
 
 ## 7. 사전등록
 
@@ -211,6 +251,7 @@ python3 tests/test_replication.py                                   # 위 결과
 | `docs/` | 생산 기록(`PROVENANCE.md`, `provenance.json`), 도식(방법, 시스템, 에이전트 타임라인, 로드맵) |
 | `findings/` | RQ별 결과 문서. `2601xx`는 탐색, `260120_확증검정.md`는 확증 |
 | `data/aggregates/`, `data/MANIFEST.sha256` | 재현용 집계(확증 5개 + `explore/` 탐색 7개), 원자료 해시 |
+| `data/derived/` | 변형 자료: 행 단위, 익명 객체 키(글·댓글·채팅·코딩·기사·트렌드) |
 | `tests/`, `.github/workflows/` | 재현 검사와 기대 출력, CI |
 | `scripts/` | 수집·적재·분석·도식 코드(실명 가림). `scripts/analysis/confirm.py`가 확증 정본 |
 | `.claude/agents/` | AI 연구원 지시문 |

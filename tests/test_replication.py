@@ -25,9 +25,30 @@ a = (c[c.phase == "사망"].groupby("platform").stance.apply(lambda s: round(100
 assert a == {"디시": 40.0, "유튜브": 36.5}, a  # RQ3 3절 표(재코딩 전)
 print("ok explore RQ1 peak, RQ3 attack share")
 
-# 3. 개인정보: 집계에 원문·작성자·제목 칸이 없다
-BAN = {"text", "author", "author_id_raw", "title", "nickname", "comment_id", "url", "description"}
-for f in pathlib.Path("data/aggregates").rglob("*.csv"):
-    cols = set(next(csv.reader(open(f))))
-    assert not cols & BAN, (f, cols & BAN)
-print("ok no text/identity columns")
+# 3. 개인정보: 원문·제목·닉네임·URL 칸이 없고, 사람 칸은 익명 키뿐이다
+import re
+BAN = {"text", "title", "name", "nickname", "url", "description", "body", "memo", "note", "snippet", "author_id"}
+KEY = re.compile(r"^((yu|du)_[0-9a-f]{12})?$")
+for f in list(pathlib.Path("data/aggregates").rglob("*.csv")) + list(pathlib.Path("data/derived").glob("*.csv")):
+    df = pd.read_csv(f, dtype=str, keep_default_na=False)
+    bad = set(df.columns) & BAN - ({"author_id"} if f.name == "chat_rows.csv" else set())  # chat_rows의 author_id는 번호
+    assert not bad, (f, bad)
+    if "author" in df.columns and f.parent.name == "derived":
+        assert df.author.map(lambda a: bool(KEY.match(a))).all(), f
+print("ok no text/identity columns, authors are pseudonymous keys")
+
+# 4. 변형 자료: 객체 키가 표 사이에서 이어진다
+D = "data/derived/"
+units = pd.read_csv(D + "codes_all.csv").unit
+keys = set(pd.read_csv(D + "dc_comments.csv").comment) | set(pd.read_csv(D + "dc_posts.csv").post) | set(pd.read_csv(D + "yt_comments.csv").comment)
+assert units.isin(keys).all(), "코딩 단위가 공개 행과 연결되지 않는다"
+dcp = set(pd.read_csv(D + "dc_posts.csv").post)
+assert pd.read_csv(D + "dc_comments.csv").post.isin(dcp).mean() > 0.9
+ch = pd.read_csv(D + "yt_chats.csv")
+assert len(ch) == 129476 and ch.groupby("author_int").author.nunique().max() == 1  # chat_rows 번호와 사람 키가 1:1
+print("ok derived keys link across tables")
+
+# 5. 신뢰도 보고값(κ)이 공개 자료로 재현된다
+r = subprocess.run([sys.executable, "scripts/analysis/reliability_public.py"], capture_output=True, text=True, check=True).stdout
+assert "κ=0.68" in r and "target_of_blame  κ=0.67" in r and "skeptic frame κ=0.52" in r, r
+print("ok reliability kappas reproduce")
