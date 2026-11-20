@@ -46,6 +46,8 @@ python3 scripts/analysis/alt_checks.py                           # 다른 통계
 5. **비교 사례**: 같은 코드북과 파이프라인으로 다른 사건을 잰다. 단일 사례라는 한계를 넘는 유일한 길이다.
 6. **수집 전 삭제**: 수집하기 전에 지워진 글은 이 자료에 없다. 그 규모는 모른다.
 
+AI가 무엇을 했고 토큰과 도구를 얼마나 썼는지는 [`docs/PROVENANCE.md`](docs/PROVENANCE.md)에 있다. 측정 신뢰도를 의심한다면 거기서부터 본다.
+
 자세한 위협 장부는 [`VALIDITY.md`](VALIDITY.md), 후속 방향은 [`findings/260120_RQ11_종합.md`](findings/260120_RQ11_종합.md)에 있다.
 
 

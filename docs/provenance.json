@@ -1,0 +1,551 @@
+{
+ "note": "상한값: PI 세션에는 연구 외 요청(브리핑, 메시지 전송 등)이 일부 섞여 있다. 웹 claude.ai·Gemini·Grok·Feynman 토큰은 계측 불가로 제외.",
+ "session_span_kst": [
+  "2026-11-19 17:08",
+  "2026-11-20 15:56"
+ ],
+ "pi": {
+  "model": {
+   "claude-opus-5-5": 563
+  },
+  "responses": 563,
+  "tokens": {
+   "input_tokens": 1300,
+   "cache_creation_input_tokens": 2496583,
+   "cache_read_input_tokens": 205476159,
+   "output_tokens": 461096
+  },
+  "tool_calls": {
+   "Bash": 352,
+   "claude-in-chrome": 95,
+   "Write": 33,
+   "Read": 29,
+   "Agent": 27,
+   "ToolSearch": 8,
+   "Skill": 3,
+   "EnterPlanMode": 3,
+   "ExitPlanMode": 3,
+   "AskUserQuestion": 2,
+   "WebFetch": 1
+  }
+ },
+ "subagents": {
+  "runs": 27,
+  "peak_concurrency": 6,
+  "peak_at_kst": "2026-11-20 14:32",
+  "by_role": {
+   "analyst": {
+    "runs": 3,
+    "model": [
+     "claude-sonnet-5-5"
+    ],
+    "output_tokens": 113779,
+    "hours": 0.25
+   },
+   "coder": {
+    "runs": 10,
+    "model": [
+     "claude-haiku-5-5"
+    ],
+    "output_tokens": 1046782,
+    "hours": 1.29
+   },
+   "designer": {
+    "runs": 2,
+    "model": [
+     "claude-sonnet-5-5"
+    ],
+    "output_tokens": 58273,
+    "hours": 0.15
+   },
+   "forecaster": {
+    "runs": 1,
+    "model": [
+     "claude-sonnet-5-5"
+    ],
+    "output_tokens": 32121,
+    "hours": 0.08
+   },
+   "lens": {
+    "runs": 2,
+    "model": [
+     "claude-opus-5-5"
+    ],
+    "output_tokens": 50317,
+    "hours": 0.14
+   },
+   "modeler": {
+    "runs": 1,
+    "model": [
+     "claude-opus-5-5"
+    ],
+    "output_tokens": 48382,
+    "hours": 0.22
+   },
+   "recoder": {
+    "runs": 2,
+    "model": [
+     "claude-sonnet-5-5"
+    ],
+    "output_tokens": 56304,
+    "hours": 0.12
+   },
+   "researcher": {
+    "runs": 2,
+    "model": [
+     "claude-opus-5-5"
+    ],
+    "output_tokens": 69141,
+    "hours": 0.27
+   },
+   "skeptic": {
+    "runs": 4,
+    "model": [
+     "claude-sonnet-5-5"
+    ],
+    "output_tokens": 94338,
+    "hours": 0.27
+   }
+  },
+  "runs_detail": [
+   {
+    "role": "coder",
+    "task": "Confirm coder batch d",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-20 14:31",
+    "end": "2026-11-20 14:41",
+    "responses": 20,
+    "tokens": {
+     "input_tokens": 40,
+     "cache_creation_input_tokens": 245921,
+     "cache_read_input_tokens": 3176066,
+     "output_tokens": 132511
+    },
+    "tool_calls": 19
+   },
+   {
+    "role": "analyst",
+    "task": "Analyst RQ3 RQ10 discourse shift",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-19 22:40",
+    "end": "2026-11-19 22:44",
+    "responses": 19,
+    "tokens": {
+     "input_tokens": 38,
+     "cache_creation_input_tokens": 125628,
+     "cache_read_input_tokens": 1756852,
+     "output_tokens": 28187
+    },
+    "tool_calls": 19
+   },
+   {
+    "role": "analyst",
+    "task": "Analyst RQ1+RQ2 first findings",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-19 22:22",
+    "end": "2026-11-19 22:27",
+    "responses": 18,
+    "tokens": {
+     "input_tokens": 38,
+     "cache_creation_input_tokens": 161322,
+     "cache_read_input_tokens": 1905360,
+     "output_tokens": 38740
+    },
+    "tool_calls": 21
+   },
+   {
+    "role": "coder",
+    "task": "Coder main batch ab",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-19 22:29",
+    "end": "2026-11-19 22:40",
+    "responses": 15,
+    "tokens": {
+     "input_tokens": 30,
+     "cache_creation_input_tokens": 270766,
+     "cache_read_input_tokens": 2217089,
+     "output_tokens": 139659
+    },
+    "tool_calls": 14
+   },
+   {
+    "role": "analyst",
+    "task": "Analyst RQ4 safety mechanisms",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 00:29",
+    "end": "2026-11-20 00:36",
+    "responses": 21,
+    "tokens": {
+     "input_tokens": 42,
+     "cache_creation_input_tokens": 165528,
+     "cache_read_input_tokens": 2343689,
+     "output_tokens": 46852
+    },
+    "tool_calls": 22
+   },
+   {
+    "role": "forecaster",
+    "task": "Forecaster RQ8 scenarios",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 00:29",
+    "end": "2026-11-20 00:34",
+    "responses": 17,
+    "tokens": {
+     "input_tokens": 34,
+     "cache_creation_input_tokens": 141710,
+     "cache_read_input_tokens": 1846710,
+     "output_tokens": 32121
+    },
+    "tool_calls": 19
+   },
+   {
+    "role": "coder",
+    "task": "Coder A pilot 200 comments",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-19 22:22",
+    "end": "2026-11-19 22:29",
+    "responses": 10,
+    "tokens": {
+     "input_tokens": 20,
+     "cache_creation_input_tokens": 194504,
+     "cache_read_input_tokens": 1025724,
+     "output_tokens": 83894
+    },
+    "tool_calls": 10
+   },
+   {
+    "role": "modeler",
+    "task": "Modeler RQ7 RQ9 Hawkes early warning",
+    "model": "claude-opus-5-5",
+    "start": "2026-11-19 22:41",
+    "end": "2026-11-19 22:54",
+    "responses": 22,
+    "tokens": {
+     "input_tokens": 46,
+     "cache_creation_input_tokens": 165049,
+     "cache_read_input_tokens": 2413276,
+     "output_tokens": 48382
+    },
+    "tool_calls": 23
+   },
+   {
+    "role": "researcher",
+    "task": "Design research and lab design system",
+    "model": "claude-opus-5-5",
+    "start": "2026-11-20 00:40",
+    "end": "2026-11-20 00:47",
+    "responses": 28,
+    "tokens": {
+     "input_tokens": 58,
+     "cache_creation_input_tokens": 170934,
+     "cache_read_input_tokens": 3432043,
+     "output_tokens": 32699
+    },
+    "tool_calls": 76
+   },
+   {
+    "role": "coder",
+    "task": "Coder main batch aa",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-19 22:29",
+    "end": "2026-11-19 22:35",
+    "responses": 17,
+    "tokens": {
+     "input_tokens": 34,
+     "cache_creation_input_tokens": 190900,
+     "cache_read_input_tokens": 2045259,
+     "output_tokens": 82445
+    },
+    "tool_calls": 16
+   },
+   {
+    "role": "coder",
+    "task": "Confirm coder batch c",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-20 14:31",
+    "end": "2026-11-20 14:40",
+    "responses": 14,
+    "tokens": {
+     "input_tokens": 28,
+     "cache_creation_input_tokens": 224385,
+     "cache_read_input_tokens": 2055154,
+     "output_tokens": 110116
+    },
+    "tool_calls": 13
+   },
+   {
+    "role": "coder",
+    "task": "Coder B pilot 200 comments",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-19 22:22",
+    "end": "2026-11-19 22:26",
+    "responses": 13,
+    "tokens": {
+     "input_tokens": 26,
+     "cache_creation_input_tokens": 148905,
+     "cache_read_input_tokens": 1304741,
+     "output_tokens": 57739
+    },
+    "tool_calls": 12
+   },
+   {
+    "role": "recoder",
+    "task": "Recode confirm unclear + memes",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 14:42",
+    "end": "2026-11-20 14:43",
+    "responses": 6,
+    "tokens": {
+     "input_tokens": 12,
+     "cache_creation_input_tokens": 98464,
+     "cache_read_input_tokens": 417199,
+     "output_tokens": 11390
+    },
+    "tool_calls": 5
+   },
+   {
+    "role": "skeptic",
+    "task": "Verify Grok-only design claims",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 08:23",
+    "end": "2026-11-20 08:24",
+    "responses": 6,
+    "tokens": {
+     "input_tokens": 12,
+     "cache_creation_input_tokens": 92366,
+     "cache_read_input_tokens": 392715,
+     "output_tokens": 7234
+    },
+    "tool_calls": 21
+   },
+   {
+    "role": "lens",
+    "task": "Lens RQ11 synthesis",
+    "model": "claude-opus-5-5",
+    "start": "2026-11-20 14:45",
+    "end": "2026-11-20 14:48",
+    "responses": 16,
+    "tokens": {
+     "input_tokens": 32,
+     "cache_creation_input_tokens": 165737,
+     "cache_read_input_tokens": 1768859,
+     "output_tokens": 18472
+    },
+    "tool_calls": 16
+   },
+   {
+    "role": "coder",
+    "task": "Coder main batch ad",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-19 22:30",
+    "end": "2026-11-19 22:36",
+    "responses": 12,
+    "tokens": {
+     "input_tokens": 24,
+     "cache_creation_input_tokens": 187261,
+     "cache_read_input_tokens": 1179611,
+     "output_tokens": 86334
+    },
+    "tool_calls": 11
+   },
+   {
+    "role": "skeptic",
+    "task": "Skeptic coder drift check",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-19 22:40",
+    "end": "2026-11-19 22:43",
+    "responses": 13,
+    "tokens": {
+     "input_tokens": 26,
+     "cache_creation_input_tokens": 113267,
+     "cache_read_input_tokens": 1159230,
+     "output_tokens": 20908
+    },
+    "tool_calls": 12
+   },
+   {
+    "role": "lens",
+    "task": "Lens RQ5 RQ6 comparison meaning",
+    "model": "claude-opus-5-5",
+    "start": "2026-11-20 00:29",
+    "end": "2026-11-20 00:34",
+    "responses": 13,
+    "tokens": {
+     "input_tokens": 26,
+     "cache_creation_input_tokens": 165671,
+     "cache_read_input_tokens": 1256477,
+     "output_tokens": 31845
+    },
+    "tool_calls": 13
+   },
+   {
+    "role": "skeptic",
+    "task": "Skeptic review RQ4-8 findings",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 14:31",
+    "end": "2026-11-20 14:43",
+    "responses": 50,
+    "tokens": {
+     "input_tokens": 100,
+     "cache_creation_input_tokens": 254591,
+     "cache_read_input_tokens": 7952359,
+     "output_tokens": 59021
+    },
+    "tool_calls": 51
+   },
+   {
+    "role": "recoder",
+    "task": "Recode 388 unclear items",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-19 22:43",
+    "end": "2026-11-19 22:49",
+    "responses": 7,
+    "tokens": {
+     "input_tokens": 14,
+     "cache_creation_input_tokens": 149815,
+     "cache_read_input_tokens": 577674,
+     "output_tokens": 44914
+    },
+    "tool_calls": 7
+   },
+   {
+    "role": "coder",
+    "task": "Confirm coder batch a",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-20 14:31",
+    "end": "2026-11-20 14:40",
+    "responses": 16,
+    "tokens": {
+     "input_tokens": 32,
+     "cache_creation_input_tokens": 251499,
+     "cache_read_input_tokens": 2456908,
+     "output_tokens": 127075
+    },
+    "tool_calls": 15
+   },
+   {
+    "role": "coder",
+    "task": "Confirm coder batch b",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-20 14:31",
+    "end": "2026-11-20 14:39",
+    "responses": 14,
+    "tokens": {
+     "input_tokens": 28,
+     "cache_creation_input_tokens": 217841,
+     "cache_read_input_tokens": 1876652,
+     "output_tokens": 105205
+    },
+    "tool_calls": 13
+   },
+   {
+    "role": "skeptic",
+    "task": "Skeptic verify 10 design refs",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 01:09",
+    "end": "2026-11-20 01:10",
+    "responses": 6,
+    "tokens": {
+     "input_tokens": 12,
+     "cache_creation_input_tokens": 83324,
+     "cache_read_input_tokens": 370531,
+     "output_tokens": 7175
+    },
+    "tool_calls": 15
+   },
+   {
+    "role": "coder",
+    "task": "Coder main batch ac",
+    "model": "claude-haiku-5-5",
+    "start": "2026-11-19 22:30",
+    "end": "2026-11-19 22:38",
+    "responses": 18,
+    "tokens": {
+     "input_tokens": 36,
+     "cache_creation_input_tokens": 240955,
+     "cache_read_input_tokens": 2503983,
+     "output_tokens": 121804
+    },
+    "tool_calls": 17
+   },
+   {
+    "role": "designer",
+    "task": "Designer poster A0 and 1-page summary",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 14:45",
+    "end": "2026-11-20 14:48",
+    "responses": 14,
+    "tokens": {
+     "input_tokens": 30,
+     "cache_creation_input_tokens": 134630,
+     "cache_read_input_tokens": 1499812,
+     "output_tokens": 20435
+    },
+    "tool_calls": 20
+   },
+   {
+    "role": "designer",
+    "task": "Designer redesign poster figures",
+    "model": "claude-sonnet-5-5",
+    "start": "2026-11-20 14:32",
+    "end": "2026-11-20 14:37",
+    "responses": 18,
+    "tokens": {
+     "input_tokens": 46,
+     "cache_creation_input_tokens": 192859,
+     "cache_read_input_tokens": 2448359,
+     "output_tokens": 37838
+    },
+    "tool_calls": 28
+   },
+   {
+    "role": "researcher",
+    "task": "Primary-source research on AI lab design",
+    "model": "claude-opus-5-5",
+    "start": "2026-11-20 01:00",
+    "end": "2026-11-20 01:09",
+    "responses": 50,
+    "tokens": {
+     "input_tokens": 106,
+     "cache_creation_input_tokens": 297311,
+     "cache_read_input_tokens": 6948114,
+     "output_tokens": 36442
+    },
+    "tool_calls": 81
+   }
+  ]
+ },
+ "by_model": {
+  "claude-opus-5-5": {
+   "input_tokens": 1568,
+   "cache_creation_input_tokens": 3461285,
+   "cache_read_input_tokens": 221294928,
+   "output_tokens": 628936
+  },
+  "claude-haiku-5-5": {
+   "input_tokens": 298,
+   "cache_creation_input_tokens": 2172937,
+   "cache_read_input_tokens": 19841187,
+   "output_tokens": 1046782
+  },
+  "claude-sonnet-5-5": {
+   "input_tokens": 404,
+   "cache_creation_input_tokens": 1713504,
+   "cache_read_input_tokens": 22670490,
+   "output_tokens": 354815
+  }
+ },
+ "api_list_price_usd_estimate": 85.24,
+ "software": {
+  "claude_code": "2.1.323 (Claude Code)",
+  "python": "Python 3.13.2",
+  "numpy/pandas/scipy": "2.2.3 2.2.3 1.18.1",
+  "matplotlib": "3.11.0",
+  "yt-dlp": "2026.08.19",
+  "sqlite": "3.54.0",
+  "tmux": "tmux 3.6a",
+  "feynman": "0.5.71",
+  "poppler(pdftoppm)": "pdftoppm version 26.04.0",
+  "os": "27.2.1"
+ }
+}
