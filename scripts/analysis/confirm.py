@@ -162,7 +162,7 @@ if PUB or glob.glob(str(ROOT / "data/raw/codes_confirm_*.jsonl")):
     lo6, hi6 = np.quantile(dd, [0.025, 0.975])
     R.append(("H6 제도 대체(고발 후 F03+F09 안 오름)", f"고발 전 {pre.mean():.1%} (n={len(pre)}) → 고발~검증 {post.mean():.1%} (n={len(post)}), 차 95% CI [{lo6:+.1%}, {hi6:+.1%}]",
               "지지" if lo6 <= 0 else "기각", None, "확증(새 표본)"))
-    print("코딩:", len(d), "건, 국면별", d.phase.value_counts().to_dict(), "| unclear", f"{(d.frame=='unclear').mean():.1%}")
+    print("코딩:", len(d), "건, 국면별", dict(sorted(d.phase.value_counts().items())), "| unclear", f"{(d.frame=='unclear').mean():.1%}")
 
 # ---------- Holm (확증 가족 중 p가 있는 것)
 fam = [(i, r[3]) for i, r in enumerate(R) if r[4].startswith("확증") and r[3] is not None]
