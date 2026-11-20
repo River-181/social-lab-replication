@@ -10,7 +10,10 @@ env = {**os.environ, "LAB_PUBLIC": "data/aggregates"}
 
 # 1. 확증 H1~H7: 비공개 원자료로 낸 결과와 같은 출력(시드 고정)
 out = subprocess.run([sys.executable, "scripts/analysis/confirm.py"], env=env, capture_output=True, text=True, check=True).stdout
-assert out == (R / "tests/expected/confirm_public.txt").read_text(), "확증 출력이 기대값과 다르다"
+exp = (R / "tests/expected/confirm_public.txt").read_text()
+if out != exp:
+    import difflib
+    sys.exit("확증 출력이 기대값과 다르다:\n" + "\n".join(difflib.unified_diff(exp.splitlines(), out.splitlines(), "expected", "got", lineterm="")))
 print("ok confirm H1-H7 identical")
 
 # 2. 탐색 단계 대표 수치(findings 문서와 대조)
