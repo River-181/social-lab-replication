@@ -1,5 +1,7 @@
 # 리트냥이 사태, 온라인에서 무슨 일이 있었나
 
+[![replicate](https://github.com/River-181/social-lab-replication/actions/workflows/replicate.yml/badge.svg)](https://github.com/River-181/social-lab-replication/actions/workflows/replicate.yml)
+
 **2026년 11월 「세무냥이·리트냥이」 의혹부터 당사자 사망(11-19)까지, 공개적으로 보이던 온라인 담론을 데이터로 본 비공식 연구. 그 검증용 공개 저장소다.**
 
 > 자살 관련 내용이 있다. 힘들면 읽지 않아도 된다. 자살예방 상담전화 ☎109, SNS상담 마들랜.
@@ -35,7 +37,11 @@
 pip install -r requirements.txt
 LAB_PUBLIC=data/aggregates python3 scripts/analysis/confirm.py      # 사전등록 판정(정본)
 python3 scripts/analysis/alt_checks.py                              # 다른 통계 방법으로 다시 보기
+python3 scripts/analysis/explore_public.py                          # 탐색 단계(RQ1·2·3·10) 핵심 수치
+python3 tests/test_replication.py                                   # 위 결과가 기대값과 같은지 + 집계에 원문·식별 칸이 없는지
 ```
+
+푸시할 때마다 GitHub Actions가 같은 검사를 돌린다(맨 위 배지).
 
 기대 출력(일부):
 
@@ -149,6 +155,13 @@ python3 scripts/analysis/alt_checks.py                              # 다른 통
 | `dc_gallery_posts.csv` | 디시 갤러리 id와 게시 시각 | H4 |
 | `codes_confirm.csv` | 확증 표본 1,706건의 코딩 값, 게시 시각, 갤러리. 원문과 id는 없다 | H1, H2, H5, H6 |
 | `codes_confirm_norecode.csv` | 같은 표본에서 unclear 재코딩을 하기 전 값 | 민감도 S3 |
+| `explore/hourly_volume.csv` | 출처별 시간당 건수(유튜브 업로드·댓글·채팅, 디시 전용갤·관련갤 글·댓글, 네이트판) | RQ1, RQ4, RQ7, RQ9 |
+| `explore/yt_videos.csv` | 영상 287편: 유형, 방송사 이름(개인 채널은 `개인-NN`), 게시 시각, 길이, 조회·좋아요·댓글 수, 채팅·슈퍼챗 수와 금액. 제목은 없다 | RQ2 |
+| `explore/yt_view_snapshots.csv` | 영상별 조회수 스냅샷 시계열 | RQ1 확산 |
+| `explore/chat_per_minute.csv` | 생방송별 분당 채팅·슈퍼챗 수 | RQ2, RQ4 |
+| `explore/codes_explore.csv`, `_norecode.csv` | 탐색 표본 1,800건 코딩(플랫폼, 갤러리/영상 키, 시각, 국면, 프레임, 입장, 감정, 비난 대상, 플래그 L·R·O·E) | RQ3, RQ9, RQ10 |
+
+영상 키 `v###`는 `chat_rows.csv`·`live_items.csv`와 같은 규칙이라 서로 이어 붙일 수 있다.
 
 
 ## 7. 사전등록
@@ -197,7 +210,8 @@ python3 scripts/analysis/alt_checks.py                              # 다른 통
 | `METHODS.md`, `VALIDITY.md`, `PREREG.md`, `codebook.md`, `DESIGN.md` | 방법, 타당도 위협 장부, 사전등록, 코드북, 그림 규칙 |
 | `docs/` | 생산 기록(`PROVENANCE.md`, `provenance.json`), 도식(방법, 시스템, 에이전트 타임라인, 로드맵) |
 | `findings/` | RQ별 결과 문서. `2601xx`는 탐색, `260120_확증검정.md`는 확증 |
-| `data/aggregates/`, `data/MANIFEST.sha256` | 재현용 집계, 원자료 해시 |
+| `data/aggregates/`, `data/MANIFEST.sha256` | 재현용 집계(확증 5개 + `explore/` 탐색 7개), 원자료 해시 |
+| `tests/`, `.github/workflows/` | 재현 검사와 기대 출력, CI |
 | `scripts/` | 수집·적재·분석·도식 코드(실명 가림). `scripts/analysis/confirm.py`가 확증 정본 |
 | `.claude/agents/` | AI 연구원 지시문 |
 | `poster/` | 포스터, 요약, 참고문헌(RIS) |

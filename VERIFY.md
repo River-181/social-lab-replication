@@ -15,6 +15,7 @@ python3 scripts/analysis/alt_checks.py                           # 다른 통계
 |---|---|---|
 | 재현 | 사전등록 가설 H1~H7 판정을 같은 숫자로 다시 얻는다 | 이 저장소 |
 | 반론 | 검정 방법, 기준값, 국면 경계, 표본 단위를 바꿔서 결론이 버티는지 본다 | 이 저장소(`data/aggregates/`) |
+| 탐색 재분석 | RQ1(확산), RQ2(증폭), RQ3·RQ10(담론·비난), RQ7·RQ9(시계열 모형·조기경보)를 다시 하거나 다른 모형을 써 본다 | `data/aggregates/explore/`, 시작점 `scripts/analysis/explore_public.py` |
 | 측정 검증 | 코딩이 맞는지 원문을 보고 판단한다 | 원문(비공개, 아래 4절) |
 | 재수집 | 같은 자료를 다시 모은다 | 실명 키워드(가림), 이미 지워진 글은 불가 |
 
@@ -66,6 +67,7 @@ AI가 무엇을 했고 토큰과 도구를 얼마나 썼는지는 [`docs/PROVENA
 - **gall / gall_id**: 디시인사이드 갤러리 id. `fkgjwks`가 이 사건 전용 갤러리다(전수 수집)
 - **chat_rows.kind**: text(일반 채팅), superchat(유료 후원) 등
 - **live_items**: 방송사가 아닌 개인 채널 생방송만 있다. `track`은 제목에 추적·검증 어휘가 있는지, `excluded_channel`은 H7 민감도에서 뺀 채널인지다
+- **탐색 집계(`explore/`)**: 시각은 KST 분 단위. `hourly_volume.series`는 yt_upload, yt_comment, yt_chat, dc_dedicated_gallery_post(전용갤 전수), dc_related_gallery_post(관련갤 키워드), dc_comment, pann_post. 탐색 코딩의 국면은 `phase` 칸에 들어 있다(검증과 실종을 합친 5국면). 동결 DB 기준이라 그날 사본으로 쓴 findings 문서와 일부 수치가 다를 수 있다. 예: RQ3 3절 표는 재코딩 전 값이다(`codes_explore_norecode.csv`로 그대로 재현된다).
 - 코더 지시문은 [`.claude/agents/coder.md`](.claude/agents/coder.md)에 있다
 
 
